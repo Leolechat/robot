@@ -33,17 +33,6 @@ void receiveEvent(int howMany){
  }
 }
 
-void setup() {
-  servo_x.attach(9);
-  servo_y.attach(10);
-  pinMode(4, OUTPUT); //Pin communication
-  pinMode(5, OUTPUT);
-  
-  Wire.begin(1);                // join i2c bus with address #1
-  Wire.OnRequest(receiveEvent); // register event
-  Serial.begin(9600);
-}
-
 void marche(){
   
   *position_x = 0;    //RAZ
@@ -61,6 +50,17 @@ void marche(){
   *position_y = *position_y + 90;
   servo_y.write(*position_y);
   delay(1000);  
+}
+
+void setup() {
+  servo_x.attach(9);
+  servo_y.attach(10);
+  pinMode(4, OUTPUT); //Pin communication
+  pinMode(5, OUTPUT);
+  
+  Wire.begin(1);                // join i2c bus with address #1
+  Wire.OnRequest(receiveEvent); // register event
+  Serial.begin(9600);
 }
 
 void loop(){
